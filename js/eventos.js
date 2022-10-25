@@ -1,6 +1,6 @@
-import { creaCard, spinner, modalBody } from "./ui.js";
+import { creaCard, spinner, modalBody } from './ui.js';
 
-const urlBase = 'https://rickandmortyapi.com/api/character/';
+export const urlBase = 'https://rickandmortyapi.com/api/character/';
 
 export const showModal = (e) => {
     e.preventDefault();
@@ -9,6 +9,7 @@ export const showModal = (e) => {
         loadCharacterInfo(urlBase, id);
     }
 }
+
 export const navegacion = (e) => {
     e.preventDefault();
     if(e.target.classList.contains('btn')){
@@ -16,6 +17,7 @@ export const navegacion = (e) => {
         loadData(urlBase, page);
     }
 }
+
 export const loadData = (url, page = 1) => {
     url += `?page=${page}`;
     fetch(url)
@@ -23,9 +25,6 @@ export const loadData = (url, page = 1) => {
     .then(respJson => {
         const info = respJson.info;
         const personajes = respJson.results;
-        //console.log(info.next);
-        //console.log(info.prev);
-        //creaButtons();
         if(!info.prev){
             document.querySelector('#prev').classList.add('disabled')
         } else {
@@ -42,10 +41,10 @@ export const loadData = (url, page = 1) => {
         showCharacters(personajes);
     })
 }
+
 export const loadCharacterInfo = (url, id) => {
     let urlCharacter = `${url}${id}`;
     console.log(urlCharacter);
-    fetch(urlCharacter)
     const modalContent = document.querySelector('.modal-body');
     modalContent.removeChild(modalContent.firstChild);
     modalContent.appendChild(spinner());
@@ -54,14 +53,13 @@ export const loadCharacterInfo = (url, id) => {
         .then(respuesta => respuesta.json())
         .then(personaje => {
             //TODO: Implementar Modal con info del personaje
-            console.log(personaje);
-            alert(personaje.name);
             modalContent.removeChild(modalContent.firstChild);
             document.querySelector('.modal-title').innerText = personaje.name;
             modalContent.appendChild(modalBody(personaje));
         });
     }, 2000);
 }
+
 export const showCharacters = (personajes) => {
     const contenedorRespuesta = document.querySelector('#respuesta');
     while(contenedorRespuesta.firstChild){

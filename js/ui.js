@@ -9,6 +9,7 @@ export const spinner = () => {
     div.innerHTML = html;
     return div;
 }
+
 export const creaCard = (personaje) => {
     const card = document.createElement('div');
     card.style = 'float: left;';
@@ -18,7 +19,6 @@ export const creaCard = (personaje) => {
         <div class="card-body">
         <h5 class="card-title">${personaje.name}</h5>
         <p class="card-text">${personaje.status}</p>
-        <button class="btn btn-primary btn-block" data-id="${personaje.id}">Ver Más</button>
         <button 
             class="btn btn-primary btn-block" 
             data-id="${personaje.id}"
@@ -29,6 +29,7 @@ export const creaCard = (personaje) => {
     card.innerHTML = html;
   return card;
 }
+
 export const modalBody = (personaje) => {
     const div = document.createElement('div');
     const origen = personaje.origin.name;
